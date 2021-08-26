@@ -18,29 +18,65 @@ button{
 }
 
 button:hover{
+    cursor: pointer;
+}
+
+.gameContainer{
+    background-color: black;
+    width: 650px;
+    height: 500px;
+    margin: auto;
+    position: relative;
 
 }
 
-.hid{
-    alignment: center;
+.gameScreen{
+    position: absolute;
 }
 
-#startgame{
-    align-content: center;
+#startScreen{
+    z-index: 1;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 650px;
+    height: 500px;
+
+
+
 }
 
 #number{
     visibility: hidden;
+    background-color: aqua;
+    z-index: 2;
+    width: 650px;
+    height: 500px;
+}
+
+#startGameButton{
+    align-content: center;
+    vertical-align: center;
 }
 
 #answer{
     visibility: hidden;
+    alignment: center;
+    width: 650px;
+    height: 500px;
 }
 
 #successScreen{
     visibility: hidden;
+    alignment: center;
+    width: 650px;
+    height: 500px;
 }
 
 #failureScreen{
     visibility: hidden;
+    alignment: center;
+    width: 650px;
+    height: 500px;
 }
