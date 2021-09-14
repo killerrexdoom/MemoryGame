@@ -6,29 +6,23 @@
     <link rel="stylesheet" href="memory.css">
 </head>
 <body>
+<!-- Defines the game as an object so it can be more easily positioned-->
 <div id="game" class="gameContainer">
-    <div class="gameHelp">
-        <button>Help</button>
-        <div class="gameHelpScreen">
-            <H1>Instructions</H1>
-            <p>From the start screen, click the button labeled "Start" and a number will appear on screen.</p>
-            <p>A number will appear on screen, when you think you have memorised the number, click the button labeled "Next".</p>
-            <p>A text field, and button labeled "Submit" will appear, and the number will disappear. Click on the text field and type the number, then press the button.</p>
-        </div>
-    </div>
-
     <div id="startScreen" class="gameScreen">
         <button id="startGameButton" onclick="Game()">Start Game</button>
     </div>
 
     <div id="number" class="gameScreen">
         <p>Remember:</p>
+        <!-- This shows the number in plaintext without anything on top. Players can copy this to clipboard.
+        This should be upgraded by putting an element on top of it, or displaying it as images.-->
         <p id="value">32</p>
         <button id="timeup" onclick="PartTwo()">Ready</button>
     </div>
 
     <div id="answer" class="gameScreen">
         <p>What was the number?</p>
+        <!--The answer box needs to be upgraded so that it is automatically focused and can be submitted by pressing 'return'.-->
         <label>
             <input id="answerText" type="text">
         </label>
@@ -45,14 +39,21 @@
         <button id="resetFailure" onclick="Reset()">Reset</button>
     </div>
 </div>
-<input id="levelSetInput" type="number">
-<button onclick="LevelSet()">OK</button>
+
+<div class="gameHelpScreen">
+    <H1>Instructions</H1>
+    <p>From the start screen, click the button labeled "Start" and a number will appear on screen.</p>
+    <p>A number will appear on screen, when you think you have memorised the number, click the button labeled "Next".</p>
+    <p>A text field, and button labeled "Submit" will appear, and the number will disappear. Click on the text field and type the number, then press the button.</p>
+    <p>If the answer is correct you will see the success screen with a button. Clicking this button will take you to the next level. If the answer is incorrect you will be taken to the endgame screen where there is a button to reset the game and try again.</p>
+</div>
 
 <script>
     var value = "";
     let randSingle = 0
     let level = 1
     let stringle = "!"
+    // This moves the player from the start screen to the random number to be remembered.
     function Game() {
         document.getElementById("startScreen").style.visibility = "hidden";
         NewRandNum();
@@ -61,6 +62,7 @@
 
     }
     // This function generates a random number based on level to add difficulty progression
+    // This must be saved as a string to work around the size limit of integers.
     function NewRandNum(){
         value = "";
         for(let i=0; i<level; i++) {
@@ -69,6 +71,8 @@
             value = value + randSingle;
         }
     }
+    // This moves the player from the random number to the answer screen.
+    // It is currently linked to a button, but it should really be triggered after a time delay.
     function PartTwo(){
         document.getElementById("answer").style.visibility = "visible";
         document.getElementById("number").style.visibility = "hidden";
@@ -91,15 +95,13 @@
         document.getElementById("answerText").value = "";
         document.getElementById("number").style.visibility = "visible";
     }
+    // This function bypasses the start screen for a reset. This may be changed in the future.
     function Reset() {
         document.getElementById("successScreen").style.visibility = "hidden";
         document.getElementById("failureScreen").style.visibility = "hidden";
         document.getElementById("startScreen").style.visibility = "visible";
         document.getElementById("answerText").value = "";
         level = 1
-    }
-    function LevelSet(){
-    level = document.getElementById("levelSetInput");
     }
 </script>
 
